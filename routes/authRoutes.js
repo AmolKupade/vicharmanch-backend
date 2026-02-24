@@ -12,7 +12,7 @@ router.get('/google', googleAuth);
 router.get('/twitter', twitterAuth);
 
 router.get('/google/callback', 
-  passport.authenticate('google', { session: false, failureRedirect: 'http://localhost:4200/auth' }), 
+  passport.authenticate('google', { session: false, failureRedirect: 'https://vichar-manch.netlify.app/auth' }), 
   (req, res) => {
     // यशस्वी लॉगिन झाल्यावर युजरसाठी JWT Token बनवणे
     const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -26,7 +26,7 @@ router.get('/google/callback',
     }));
     
     // 🚀 Angular च्या होम पेजवर किंवा Auth पेजवर टोकन घेऊन रिडिरेक्ट करणे
-    res.redirect(`http://localhost:4200/auth?token=${token}&user=${userData}`);
+    res.redirect(`https://vichar-manch.netlify.app/auth?token=${token}&user=${userData}`);
   }
 );
 

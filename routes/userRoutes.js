@@ -6,7 +6,7 @@ require('../config/passport'); // आपण मगाशी बनवलेल�
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // २. जेव्हा Google यशस्वी लॉगिन करून युजरला बॅकएंडकडे परत पाठवेल
-router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: 'http://localhost:4200/auth' }), 
+router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: 'https://vichar-manch.netlify.app/auth' }), 
   (req, res) => {
     // यशस्वी झाल्यावर युजरसाठी JWT Token बनवणे
     const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -16,6 +16,6 @@ router.get('/google/callback', passport.authenticate('google', { session: false,
       id: req.user._id, name: req.user.name, email: req.user.email, avatar: req.user.avatar
     }));
     
-    res.redirect(`http://localhost:4200/auth?token=${token}&user=${userData}`);
+    res.redirect(`https://vichar-manch.netlify.app/auth?token=${token}&user=${userData}`);
   }
 );
